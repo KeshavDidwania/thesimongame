@@ -1,14 +1,21 @@
 
-var buttonColours = ["red", "blue", "green", "yellow"];
+let buttonColours = ["red", "blue", "green", "yellow"];
 
-var gamePattern = [];
-var userClickedPattern = [];
+let gamePattern = [];
+let userClickedPattern = [];
 
-var started = false;
-var level = 0;
+let started = false;
+let level = 0;
+
+let playerName = "";
+let highScore = 0 ;
+let bestPlayer = "" ;
 
 $(document).keypress(function() {
   if (!started) {
+    playerName = prompt("Enter your name");
+    playerName = playerName.trim();
+    console.log(playerName);
     $("#level-title").text("Level " + level);
     nextSequence();
     started = true;
@@ -17,7 +24,7 @@ $(document).keypress(function() {
 
 $(".btn").click(function() {
 
-  var userChosenColour = $(this).attr("id");
+  let userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
 
   playSound(userChosenColour);
@@ -55,10 +62,19 @@ function checkAnswer(currentLevel) {
         setTimeout(function(){
             $("body").removeClass("game-over");
         },200);
+        if(level > highScore){
+          bestPlayer = playerName ;
+          highScore = level - 1 ;
+          showHighScore();
+        }
         startOver();
 
     }
 
+}
+
+function showHighScore(){
+  $("h2").text("High Score - "+highScore+" : "+bestPlayer);
 }
 
 function startOver(){
@@ -75,8 +91,8 @@ function nextSequence() {
   level++;
   $("#level-title").text("Level " + level);
 
-  var randomNumber = Math.floor(Math.random() * 4);
-  var randomChosenColour = buttonColours[randomNumber];
+  let randomNumber = Math.floor(Math.random() * 4);
+  let randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
 
   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
@@ -84,7 +100,7 @@ function nextSequence() {
 }
 
 function playSound(name) {
-  var audio = new Audio(name + ".mp3");
+  let audio = new Audio(name + ".mp3");
   audio.play();
 }
 
