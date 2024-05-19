@@ -20,7 +20,7 @@ $("#level-title").click(function() {
       startOver();
     }else{
       $("#level-title").text("Level " + level);
-      nextSequence();
+      setTimeout(nextSequence,300);
       started = true;
     }
   }
