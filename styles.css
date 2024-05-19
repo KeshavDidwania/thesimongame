@@ -71,8 +71,8 @@ h2{
   .btn {
     margin: 25px;
     display: inline-block;
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
     border: 5px solid black;
     border-radius: 20%;
   }
