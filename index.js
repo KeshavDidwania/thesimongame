@@ -74,7 +74,7 @@ function checkAnswer(currentLevel) {
 }
 
 function showHighScore(){
-  $("#high-score-display").text("High Score - "+highScore+" : "+bestPlayer);
+  $("h2").text("High Score - "+highScore+" : "+bestPlayer);
 }
 
 function startOver(){
