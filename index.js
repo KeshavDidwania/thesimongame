@@ -11,16 +11,21 @@ let playerName = "";
 let highScore = 0 ;
 let bestPlayer = "" ;
 
-$(document).keypress(function() {
+$("#level-title").click(function() {
   if (!started) {
     playerName = prompt("Enter your name");
     playerName = playerName.trim();
-    console.log(playerName);
-    $("#level-title").text("Level " + level);
-    nextSequence();
-    started = true;
+    if(playerName == ""){
+      alert("Invalid Name");
+      startOver();
+    }else{
+      $("#level-title").text("Level " + level);
+      nextSequence();
+      started = true;
+    }
   }
 });
+
 
 $(".btn").click(function() {
 
@@ -57,7 +62,7 @@ function checkAnswer(currentLevel) {
 
         $("body").addClass("game-over");
         let audio = new Audio("wrong.mp3");
-        $("h1").text("Game Over, Press Any Key to Restart");
+        $("h1").text("Game Over, Click to Restart");
         audio.play();
         setTimeout(function(){
             $("body").removeClass("game-over");
